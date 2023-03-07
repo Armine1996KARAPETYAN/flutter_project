@@ -6,7 +6,8 @@ class Weather {
   int? pressure;
   int ?visibility;
 
-  Weather({required this.cityName,
+  Weather({
+    required this.cityName,
     required this.temperature,
     required this.wind,
     required this.humidity,

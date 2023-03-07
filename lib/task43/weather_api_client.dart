@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'weather.dart';
 
-Future<dynamic> fetchData() async {
+Future<Weather> fetchWeather() async {
   const String baseUrl = '//run.mocky.io';
   const String endpoint = 'v3/67827ecc-ed90-4d47-a1cc-5e3f2228b03d';
   var uri = Uri.https(
@@ -14,12 +14,11 @@ Future<dynamic> fetchData() async {
   final response = await http.get(uri);
 
   if (response.statusCode == 200) {
-    var result = jsonDecode(response.body);
+      final json = jsonDecode(response.body);
+       return Weather(cityName: 'Gyumri', temperature: 8, wind: 2, humidity: 85, pressure: 1016, visibility: 16);
+    } else {
+      throw Exception('Failed to fetch weather ');
 
-    Weather weather = Weather.fromJson(result);
-
-    return weather;
   }
 
-  return Exception();
 }
